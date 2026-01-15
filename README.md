@@ -24,12 +24,19 @@ rollcall <- data.frame(
   row.names = c("Leg_A", "Leg_B", "Leg_C", "Leg_D", "Leg_E")
 )
 
-# Run analysis
+# Run analysis (automatic pivot selection)
 results <- bcall_auto(rollcall)
+
+# Or specify pivot to control d1 orientation
+results <- bcall_auto(rollcall, pivot = "Leg_B")
 
 # Visualize
 plot_bcall_analysis_interactive(results)
 ```
+
+**Important:** Although `bcall_auto()` can automatically select a pivot, it is recommended to have knowledge of the voting data and manually specify the pivot to control the ideological orientation (d1 dimension). The pivot defines which side is "right" - if the orientation appears inverted, you can either:
+- Change the pivot to a legislator from the opposite cluster, OR
+- Simply interpret d1 values with reversed signs (positive ↔ negative)
 
 ### Principle 2: User Clustering
 
