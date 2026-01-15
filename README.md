@@ -73,28 +73,37 @@ plot_bcall_analysis_interactive(results, color_by = "cluster")
 
 ## Main Functions
 
+**Analysis:**
 - `bcall_auto(rollcall)` - Automatic clustering + analysis
 - `bcall(rollcall, clustering, pivot)` - Analysis with your clustering
-- `plot_bcall_analysis_interactive(results)` - Interactive plot
+
+**Visualization:**
+- `plot_bcall_analysis(results)` - Static ggplot2 plot
+- `plot_bcall_analysis_interactive(results)` - Interactive plotly plot
+
+**Utilities:**
 - `summarize_bcall_analysis(results)` - Summary statistics
 - `export_bcall_analysis(results)` - Export to CSV/PNG
 
-## Example with Synthetic Data
+## Real Data Example
 
 ```r
 library(bcall)
+library(readr)
+library(dplyr)
+library(tibble)
 
-# Create synthetic data
-rollcall <- create_synthetic_rollcall()
-clustering <- create_synthetic_clustering()
+# Load your CSV with votes
+rollcall <- read_csv("votes.csv") %>%
+  rename(legislator = 1) %>%
+  column_to_rownames("legislator")
 
-# Try both approaches
-results1 <- bcall_auto(rollcall)
-results2 <- bcall(rollcall, clustering, pivot = "Silva_Jorge")
+# Automatic analysis
+results <- bcall_auto(rollcall)
 
 # Visualize
-plot_bcall_analysis_interactive(results1)
-plot_bcall_analysis_interactive(results2, color_by = "cluster")
+plot_bcall_analysis_interactive(results)
+plot_bcall_analysis(results)
 ```
 
 ## Citation
