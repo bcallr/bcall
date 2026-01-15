@@ -307,7 +307,7 @@ list_legislators_by_cluster <- function(legislators_file = "data/legislators.csv
 #' @export
 plot_bcall_analysis <- function(bcall_results,
                                title = "B-Call Analysis: Legislative Voting (CSV Data)",
-                               color_by = "cluster",
+                               color_by = "auto",
                                show_names = FALSE,
                                alpha = 0.7,
                                size = 2.5) {
