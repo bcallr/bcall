@@ -110,13 +110,13 @@ BCall <- R6::R6Class("BCall",
       valid_votes <- overall_std > 0
       invalid_votes_count <- sum(!valid_votes)
       if (invalid_votes_count > 0) {
-        cat(sprintf('Filtradas %d votaciones con varianza cero (sin división de votos).\n', invalid_votes_count))
+        cat(sprintf('Filtered %d votes with zero variance (unanimous votes).\n', invalid_votes_count))
       }
       if (sum(valid_votes) == 0) {
-        stop("No hay votaciones con varianza > 0 para el análisis")
+        stop("No votes with variance > 0 available for analysis")
       }
 
-      # Usar solo votaciones válidas
+      # Use only valid votes
       rollcall_valid <- rollcall_filtered[, valid_votes, drop = FALSE]
       left_mean_valid <- left_mean[valid_votes]
       right_mean_valid <- right_mean[valid_votes]
