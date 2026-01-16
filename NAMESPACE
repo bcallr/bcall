@@ -8,11 +8,9 @@ export(Clustering)
 export(bcall_auto)
 export(bcall)
 
-# Export visualization and analysis functions
+# Export visualization functions
 export(plot_bcall_analysis)
 export(plot_bcall_analysis_interactive)
-export(summarize_bcall_analysis)
-export(export_bcall_analysis)
 
 # Import required packages
 import(R6)
