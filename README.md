@@ -99,10 +99,6 @@ plot_bcall_analysis_interactive(results, color_by = "cluster")
 - `plot_bcall_analysis(results)` - Static ggplot2 plot
 - `plot_bcall_analysis_interactive(results)` - Interactive plotly plot
 
-**Utilities:**
-- `summarize_bcall_analysis(results)` - Summary statistics
-- `export_bcall_analysis(results)` - Export to CSV/PNG
-
 ## Real Data Example
 
 ```r
