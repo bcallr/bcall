@@ -2,6 +2,17 @@
 
 B-Call analysis for legislative voting data in R.
 
+## 🌐 Examples & Tutorials
+
+**See real-world examples with Chilean legislative data:**
+👉 **[https://alcatruz.github.io/bcall-example](https://alcatruz.github.io/bcall-example)**
+
+Complete tutorial with:
+- Real voting data from Chile's Chamber of Deputies (2025)
+- Step-by-step analysis examples
+- Downloadable datasets
+- Interactive visualizations
+
 ## Installation
 
 ```r
