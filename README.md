@@ -16,7 +16,7 @@ Complete tutorial with:
 ## Installation
 
 ```r
-devtools::install_github("Alcatruz/bcall")
+devtools::install_github("bcallr/bcall")
 library(bcall)
 ```
 
