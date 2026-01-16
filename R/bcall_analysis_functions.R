@@ -1,10 +1,10 @@
-#' @title B-Call Analysis Functions
-#' @description Visualization and analysis functions for B-Call results
 #' @import dplyr
 #' @import ggplot2
 #' @import plotly
 #' @import R6
-#' @export
+
+# Declare global variables used in dplyr/ggplot2 to avoid R CMD check NOTEs
+utils::globalVariables(c("d1", "d2", "legislator"))
 
 # ===============================================================================
 # VISUALIZATION FUNCTIONS

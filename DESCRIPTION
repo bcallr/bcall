@@ -18,13 +18,10 @@ Imports:
     R6 (>= 2.4.0),
     dplyr (>= 1.0.0),
     ggplot2 (>= 3.3.0),
-    plotly (>= 4.9.0),
-    tidyr (>= 1.1.0),
-    tools,
-    utils
+    plotly (>= 4.9.0)
 Suggests:
     testthat,
     knitr,
     rmarkdown
 VignetteBuilder: knitr
-RoxygenNote: 7.2.0
+RoxygenNote: 7.3.2

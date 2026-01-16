@@ -1,9 +1,3 @@
-#' @title Main B-Call Functions
-#' @description Core functions for B-Call analysis with legislative voting data
-#' @author Daniel Alcatruz
-#' @import R6
-#' @export
-
 # ==============================================================================
 # PRINCIPLE 1: bcall_auto() - Automatic Clustering
 # ==============================================================================
@@ -13,6 +7,7 @@
 #' @description
 #' PRINCIPLE 1: User provides only rollcall data.
 #' This function automatically clusters legislators into two groups and runs B-Call analysis.
+#' @import R6
 #'
 #' @param rollcall data.frame with rollcall voting data (legislators as rows, votes as columns)
 #'   Values: 1 (Yes), -1 (No), 0 (Abstention), NA (Absent)
@@ -184,6 +179,7 @@ bcall_auto <- function(rollcall,
 #' @description
 #' PRINCIPLE 2: User provides rollcall data AND clustering assignment.
 #' This function runs B-Call analysis using the user's clustering.
+#' @import R6
 #'
 #' @param rollcall data.frame with rollcall voting data (legislators as rows, votes as columns)
 #'   Values: 1 (Yes), -1 (No), 0 (Abstention), NA (Absent)

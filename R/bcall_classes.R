@@ -1,15 +1,11 @@
-#' @title B-Call Classes
-#' @description Core BCall and Clustering classes for legislative voting analysis
-#' @import R6
-#' @export
-
 # ===============================================================================
 # BCALL CLASS
 # ===============================================================================
 
-#' @title BCall Class
-#' @description R6 class for B-Call analysis of legislative voting data
-#' @export
+#' @import R6
+
+# BCall R6 Class - Internal use only
+# Users should use bcall_auto() or bcall() instead
 BCall <- R6::R6Class("BCall",
   public = list(
     #' @field rollcall Rollcall voting matrix
@@ -148,9 +144,8 @@ BCall <- R6::R6Class("BCall",
 # CLUSTERING CLASS
 # ===============================================================================
 
-#' @title Clustering Class
-#' @description R6 class for clustering legislators into two groups
-#' @export
+# Clustering R6 Class - Internal use only
+# Users should use bcall_auto() instead
 Clustering <- R6::R6Class("Clustering",
   public = list(
     #' @field N Distance metric (1=Manhattan, 2=Euclidean)
@@ -183,6 +178,7 @@ Clustering <- R6::R6Class("Clustering",
     },
 
     #' @description Initialize clusters with farthest legislators
+    #' @param pivot Character, pivot legislator name
     initialize_clusters = function(pivot) {
       distances <- self$get_distances(self$X, self$X)
       max_idx <- which(distances == max(distances, na.rm = TRUE), arr.ind = TRUE)[1, ]
@@ -272,6 +268,7 @@ Clustering <- R6::R6Class("Clustering",
     },
 
     #' @description Assign left and right clusters based on pivot
+    #' @param pivot Character, pivot legislator name
     assign_clusters = function(pivot) {
       if (pivot %in% self$clusters[["0"]]) {
         self$clusters[["right"]] <- self$clusters[["0"]]

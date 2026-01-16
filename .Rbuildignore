@@ -9,3 +9,4 @@
 ^.*\.csv$
 ^.*\.rds$
 ^tester.*\.R$
+^tests_disabled$
