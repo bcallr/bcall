@@ -10,6 +10,8 @@ Description: Implements B-Call methodology for analyzing legislative voting data
     clustering. Users provide data as R data.frames with legislators as rows and votes
     as columns. Includes visualization tools and synthetic data for examples.
 License: MIT + file LICENSE
+URL: https://github.com/bcallr/bcall
+BugReports: https://github.com/bcallr/bcall/issues
 Encoding: UTF-8
 LazyData: true
 Depends:
