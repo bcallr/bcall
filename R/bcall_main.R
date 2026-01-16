@@ -28,9 +28,24 @@
 #'   - metadata: Analysis metadata
 #'
 #' @examples
-#' \dontrun{
-#' rollcall <- create_synthetic_rollcall()
-#' results <- bcall_auto(rollcall, distance_method = 1, threshold = 0.1)
+#' # Create sample rollcall data
+#' rollcall <- data.frame(
+#'   vote1 = c(1, -1, 1, -1, 1, -1),
+#'   vote2 = c(1, -1, 1, -1, 1, -1),
+#'   vote3 = c(-1, 1, -1, 1, -1, 1),
+#'   vote4 = c(1, 1, -1, -1, 1, -1),
+#'   row.names = paste0("Legislator_", LETTERS[1:6])
+#' )
+#'
+#' # Run automatic clustering analysis
+#' results <- bcall_auto(rollcall, distance_method = 1, threshold = 0.1, verbose = FALSE)
+#'
+#' # View results
+#' head(results$results)
+#'
+#' # Visualize
+#' \donttest{
+#' plot_bcall_analysis(results)
 #' plot_bcall_analysis_interactive(results)
 #' }
 #'
@@ -183,11 +198,30 @@ bcall_auto <- function(rollcall,
 #'   - metadata: Analysis metadata
 #'
 #' @examples
-#' \dontrun{
-#' rollcall <- create_synthetic_rollcall()
-#' clustering <- create_synthetic_clustering()
-#' results <- bcall(rollcall, clustering, pivot = "Silva_Jorge", threshold = 0.1)
-#' plot_bcall_analysis_interactive(results, color_by = "cluster")
+#' # Create sample rollcall data
+#' rollcall <- data.frame(
+#'   vote1 = c(1, -1, 1, -1, 1, -1),
+#'   vote2 = c(1, -1, 1, -1, 1, -1),
+#'   vote3 = c(-1, 1, -1, 1, -1, 1),
+#'   row.names = c("Leg_A", "Leg_B", "Leg_C", "Leg_D", "Leg_E", "Leg_F")
+#' )
+#'
+#' # Create user-defined clustering (can use any 2 values)
+#' clustering <- data.frame(
+#'   cluster = c("left", "right", "left", "right", "left", "right"),
+#'   row.names = c("Leg_A", "Leg_B", "Leg_C", "Leg_D", "Leg_E", "Leg_F")
+#' )
+#'
+#' # Run analysis with user clustering
+#' results <- bcall(rollcall, clustering, pivot = "Leg_B", threshold = 0.1, verbose = FALSE)
+#'
+#' # View results
+#' head(results$results)
+#'
+#' # Visualize
+#' \donttest{
+#' plot_bcall_analysis(results)
+#' plot_bcall_analysis_interactive(results)
 #' }
 #'
 #' @export
