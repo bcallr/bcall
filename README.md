@@ -24,7 +24,7 @@ library(bcall)
 
 ### Principle 1: Automatic Clustering
 
-Provide only rollcall data. The package clusters legislators automatically.
+Provide only rollcall data. The package clusters legislators automatically
 
 ```r
 # Your data: data.frame with rownames
