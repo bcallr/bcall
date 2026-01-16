@@ -372,7 +372,22 @@ plot_bcall_analysis <- function(bcall_results,
 
   # Add color scheme
   if (color_by == "cluster" || color_by == "auto_cluster") {
-    p <- p + ggplot2::scale_color_manual(values = c("left" = "#2E86AB", "right" = "#A23B72"))
+    # Detect cluster values and assign colors
+    cluster_values <- unique(df[[color_by]])
+
+    # Define colors for common cluster names
+    color_map <- c(
+      "left" = "#2E86AB",
+      "right" = "#A23B72",
+      "izquierda" = "#2E86AB",
+      "derecha" = "#A23B72"
+    )
+
+    # If cluster values are in color_map, use those colors
+    if (all(cluster_values %in% names(color_map))) {
+      colors_to_use <- color_map[cluster_values]
+      p <- p + ggplot2::scale_color_manual(values = colors_to_use)
+    }
   }
 
   return(p)
