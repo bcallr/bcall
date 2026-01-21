@@ -6,6 +6,15 @@
 
 B-Call analysis for legislative voting data in R.
 
+## What is B-Call?
+
+**B-Call (Bidimensional Analysis of Roll Call)** is a methodology for analyzing legislative behavior that integrates two dimensions:
+
+- **d1 (Ideological position)**: Places each legislator on the left-right spectrum based on their average voting pattern.
+- **d2 (Cohesion)**: Measures how consistent the voting behavior is. Low d2 indicates predictable voting; high d2 indicates volatility.
+
+**Why B-Call?** Traditional models like W-NOMINATE work well in stable systems with disciplined parties. But in fragmented contexts (like Chile or Brazil), legislators with low cohesion appear artificially as "moderates" when they are actually volatile. B-Call addresses this by explicitly measuring that volatility as a second dimension.
+
 ## 📚 Examples & Tutorials
 
 <div align="center">
@@ -101,12 +110,25 @@ plot_bcall_analysis_interactive(results, color_by = "cluster")
 ## Main Functions
 
 **Analysis:**
-- `bcall_auto(rollcall)` - Automatic clustering + analysis
-- `bcall(rollcall, clustering, pivot)` - Analysis with your clustering
+- `bcall_auto(rollcall, pivot = NULL, threshold = 0.1)` - Automatic clustering + analysis
+  - `pivot`: Optional. Legislator name to control d1 orientation
+  - `threshold`: Minimum participation threshold (default: 0.1). Legislators must participate in at least this proportion of votes.
+- `bcall(rollcall, clustering, pivot, threshold = 0.1)` - Analysis with your clustering
+  - `pivot`: Required. Legislator name to control d1 orientation
+  - `threshold`: Minimum participation threshold (default: 0.1)
 
 **Visualization:**
 - `plot_bcall_analysis(results)` - Static ggplot2 plot
 - `plot_bcall_analysis_interactive(results)` - Interactive plotly plot
+
+### About the `threshold` parameter
+
+The `threshold` parameter controls the minimum participation level required for legislators to be included in the analysis:
+- **Default value**: 0.1 (10% participation)
+- **Lower values** (e.g., 0.05): Include legislators with very low participation
+- **Higher values** (e.g., 0.3): Only include legislators who voted in at least 30% of votes
+- Legislators below the threshold are excluded from the analysis
+- Used in both `bcall_auto()` and `bcall()` to filter legislators by participation
 
 ## Real Data Example
 
