@@ -63,9 +63,18 @@ results <- bcall_auto(rollcall, pivot = "Leg_B")
 plot_bcall_analysis_interactive(results)
 ```
 
-**Important:** Although `bcall_auto()` can automatically select a pivot, it is recommended to have knowledge of the voting data and manually specify the pivot to control the ideological orientation (d1 dimension). The pivot defines which side is "right" - if the orientation appears inverted, you can either:
-- Change the pivot to a legislator from the opposite cluster, OR
-- Simply interpret d1 values with reversed signs (positive ↔ negative)
+**Understanding the Pivot:**
+
+The pivot legislator is crucial because it **defines the direction of the ideological axis (d1)**:
+- The cluster containing the pivot is labeled **"right"**
+- The other cluster is labeled **"left"**
+- **d1 > 0**: Legislators closer to the pivot's cluster (ideologically similar)
+- **d1 < 0**: Legislators farther from the pivot's cluster (ideologically opposite)
+
+**How to choose your pivot:**
+- If you know the data: Choose a representative legislator from the political right → d1 > 0 will represent right-wing positions
+- If orientation appears inverted: Either change the pivot to someone from the opposite cluster, OR simply interpret d1 with reversed signs
+- If unsure: Let `bcall_auto()` select automatically (picks from "right" cluster by participation)
 
 ### Principle 2: User Clustering
 
