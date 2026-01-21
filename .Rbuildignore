@@ -1,7 +1,6 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^\.Rhistory$
-^\.claude$
 ^data_vieja$
 ^cl_dat$
 ^testing$
