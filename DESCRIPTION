@@ -7,8 +7,7 @@ Authors@R: c(
     person("Juan", "Reutter", role = "aut"),
     person("Lucas", "Valenzuela", role = "aut"),
     person("Daniel", "Alcatruz", email = "daniel.alcatruz@imfd.cl", role = c("aut", "cre")),
-    person("Macarena", "Valenzuela", role = "aut")
-)
+    person("Macarena", "Valenzuela", role = "aut"))
 Description: Implements B-Call method for analyzing legislative voting data,
     integrating ideological position (d1) and political cohesion (d2) measurements.
     Provides two main approaches: automatic clustering of legislators or user-provided
