@@ -2,9 +2,14 @@ Package: bcall
 Type: Package
 Title: B-Call Analysis for Legislative Voting Data
 Version: 1.0.0
-Author: B-Call Team
-Maintainer: B-Call Team <bcall@example.com>
-Description: Implements B-Call methodology for analyzing legislative voting data,
+Authors@R: c(
+    person("Sergio", "Toro-Maureira", role = "aut"),
+    person("Juan", "Reutter", role = "aut"),
+    person("Lucas", "Valenzuela", role = "aut"),
+    person("Daniel", "Alcatruz", email = "daniel.alcatruz@imfd.cl", role = c("aut", "cre")),
+    person("Macarena", "Valenzuela", role = "aut")
+)
+Description: Implements B-Call method for analyzing legislative voting data,
     integrating ideological position (d1) and political cohesion (d2) measurements.
     Provides two main approaches: automatic clustering of legislators or user-provided
     clustering. Users provide data as R data.frames with legislators as rows and votes
@@ -15,7 +20,7 @@ BugReports: https://github.com/bcallr/bcall/issues
 Encoding: UTF-8
 LazyData: true
 Depends:
-    R (>= 3.5.0)
+    R (>= 4.1.0)
 Imports:
     R6 (>= 2.4.0),
     dplyr (>= 1.0.0),
