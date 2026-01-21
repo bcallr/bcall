@@ -8,7 +8,7 @@ B-Call analysis for legislative voting data in R.
 
 ## What is B-Call?
 
-**B-Call** is a methodology for analyzing legislative behavior that integrates two dimensions:
+**B-Call** is a method for analyzing legislative behavior that integrates two dimensions:
 
 - **d1 (Ideological position)**: Places each legislator on the left-right spectrum based on their average voting pattern.
 - **d2 (Cohesion)**: Measures how consistent the voting behavior is. Low d2 indicates predictable voting; high d2 indicates volatility.
