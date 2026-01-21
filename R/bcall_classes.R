@@ -2,10 +2,13 @@
 # BCALL CLASS
 # ===============================================================================
 
+#' BCall R6 Class (Internal)
+#'
+#' @description
+#' Internal R6 class for B-Call analysis. Users should use bcall_auto() or bcall() instead.
+#'
 #' @import R6
-
-# BCall R6 Class - Internal use only
-# Users should use bcall_auto() or bcall() instead
+#' @keywords internal
 BCall <- R6::R6Class("BCall",
   public = list(
     #' @field rollcall Rollcall voting matrix
@@ -18,15 +21,22 @@ BCall <- R6::R6Class("BCall",
     threshold = NULL,
     #' @field stats Analysis results
     stats = NULL,
+    #' @field verbose Whether to print messages
+    verbose = NULL,
 
     #' @description Initialize BCall object
     #' @param rollcall Data frame with rollcall voting data
     #' @param clustering Data frame with clustering assignments
     #' @param pivot Character, pivot legislator name
     #' @param threshold Numeric, minimum participation threshold
-    initialize = function(rollcall, clustering, pivot = "", threshold = 0.1) {
-      cat(sprintf('Rollcall dataframe contains %d legislators and %d votes.\n',
-                 nrow(rollcall), ncol(rollcall)))
+    #' @param verbose Logical, whether to print progress messages
+    initialize = function(rollcall, clustering, pivot = "", threshold = 0.1, verbose = TRUE) {
+      self$verbose <- verbose
+
+      if (verbose) {
+        cat(sprintf('Rollcall dataframe contains %d legislators and %d votes.\n',
+                   nrow(rollcall), ncol(rollcall)))
+      }
 
       self$rollcall <- self$validate_dataframe(rollcall, 'rollcall')
       self$clustering <- self$validate_dataframe(clustering, 'clustering')
@@ -82,7 +92,9 @@ BCall <- R6::R6Class("BCall",
       rollcall_filtered <- rollcall_matrix[keep_legislators, ]
       clustering_filtered <- self$clustering[keep_legislators]
 
-      cat(sprintf('%d legislators meet the participation threshold.\n', nrow(rollcall_filtered)))
+      if (self$verbose) {
+        cat(sprintf('%d legislators meet the participation threshold.\n', nrow(rollcall_filtered)))
+      }
 
       if (!(self$pivot %in% names(clustering_filtered))) {
         stop("Choose another pivot as the previous one does not meet the participation threshold.")
@@ -103,12 +115,12 @@ BCall <- R6::R6Class("BCall",
       overall_std <- apply(rollcall_filtered, 2, sd, na.rm = TRUE)
 
       # FILTRAR VOTACIONES CON VARIANZA CERO (como en Python pandas)
-      valid_votes <- overall_std > 0
-      invalid_votes_count <- sum(!valid_votes)
-      if (invalid_votes_count > 0) {
+      valid_votes <- overall_std > 0 & !is.na(overall_std)
+      invalid_votes_count <- sum(!valid_votes, na.rm = TRUE)
+      if (invalid_votes_count > 0 && self$verbose) {
         cat(sprintf('Filtered %d votes with zero variance (unanimous votes).\n', invalid_votes_count))
       }
-      if (sum(valid_votes) == 0) {
+      if (sum(valid_votes, na.rm = TRUE) == 0) {
         stop("No votes with variance > 0 available for analysis")
       }
 
@@ -144,8 +156,12 @@ BCall <- R6::R6Class("BCall",
 # CLUSTERING CLASS
 # ===============================================================================
 
-# Clustering R6 Class - Internal use only
-# Users should use bcall_auto() instead
+#' Clustering R6 Class (Internal)
+#'
+#' @description
+#' Internal R6 class for automatic legislator clustering. Users should use bcall_auto() instead.
+#'
+#' @keywords internal
 Clustering <- R6::R6Class("Clustering",
   public = list(
     #' @field N Distance metric (1=Manhattan, 2=Euclidean)

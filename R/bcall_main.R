@@ -62,6 +62,11 @@ bcall_auto <- function(rollcall,
     stop("rollcall must have rownames (legislator names)")
   }
 
+  # Validate threshold
+  if (threshold < 0 || threshold > 1) {
+    stop("threshold must be between 0 and 1")
+  }
+
   if (verbose) {
     cat("Input validation:\n")
     cat("  \u2713 Rollcall: ", nrow(rollcall), " legislators \u00d7 ", ncol(rollcall), " votes\n", sep = "")
@@ -116,7 +121,8 @@ bcall_auto <- function(rollcall,
     rollcall = rollcall,
     clustering = clustering_df,
     pivot = pivot,
-    threshold = threshold
+    threshold = threshold,
+    verbose = verbose
   )
 
   if (verbose) cat("  \u2713 B-Call analysis completed\n\n")
@@ -238,6 +244,11 @@ bcall <- function(rollcall,
     stop("rollcall must have rownames (legislator names)")
   }
 
+  # Validate threshold
+  if (threshold < 0 || threshold > 1) {
+    stop("threshold must be between 0 and 1")
+  }
+
   # Validate clustering
   if (is.vector(clustering)) {
     # Convert named vector to data.frame
@@ -318,7 +329,8 @@ bcall <- function(rollcall,
     rollcall = rollcall,
     clustering = clustering,
     pivot = pivot,
-    threshold = threshold
+    threshold = threshold,
+    verbose = verbose
   )
 
   if (verbose) cat("  \u2713 B-Call analysis completed\n\n")

@@ -1,6 +1,6 @@
 #' @import dplyr
 #' @import ggplot2
-#' @import plotly
+#' @importFrom plotly plot_ly layout
 #' @import R6
 
 # Declare global variables used in dplyr/ggplot2 to avoid R CMD check NOTEs
