@@ -44,10 +44,16 @@ library(bcall)
 
 Provide only rollcall data. The package clusters legislators automatically
 
+**Vote values (required format):**
+- `1` = Yes/A favor (voted in favor)
+- `-1` = No/En contra (voted against)
+- `0` = Abstention/Abstención
+- `NA` = Absent/Ausente (did not vote)
+
 ```r
 # Your data: data.frame with rownames
 rollcall <- data.frame(
-  Vote_01 = c(1, -1, 1, 0, NA),
+  Vote_01 = c(1, -1, 1, 0, NA),   # 1=Yes, -1=No, 0=Abstention, NA=Absent
   Vote_02 = c(1, -1, 1, 1, 1),
   Vote_03 = c(-1, 1, 1, 0, -1),
   row.names = c("Leg_A", "Leg_B", "Leg_C", "Leg_D", "Leg_E")
@@ -99,6 +105,55 @@ results <- bcall(rollcall, clustering, pivot = "Leg_B")
 
 # Visualize
 plot_bcall_analysis_interactive(results, color_by = "cluster")
+```
+
+## Understanding the Results
+
+Both `bcall_auto()` and `bcall()` return a **list** with the following components:
+
+```r
+results <- bcall_auto(rollcall)
+
+# Access the main results data.frame
+results$results
+#             d1      d2    legislator  auto_cluster
+# Leg_A     0.45    0.12   Leg_A       left
+# Leg_B    -0.32    0.08   Leg_B       right
+# ...
+
+# Access metadata
+results$metadata
+# $principle: "PRINCIPLE 1: Auto-clustering"
+# $pivot: "Leg_A"
+# $threshold: 0.1
+# $n_legislators_analyzed: 5
+# ...
+
+# Access R6 objects (advanced)
+results$bcall_object         # BCall R6 object
+results$clustering_object    # Clustering R6 object (bcall_auto only)
+```
+
+**Key columns in `results$results`:**
+- **`d1`**: Ideological position (left-right spectrum)
+- **`d2`**: Political cohesion (lower = more predictable voting)
+- **`legislator`**: Legislator name (from rownames)
+- **`auto_cluster`** (bcall_auto) or **`cluster`** (bcall): Cluster assignment
+
+**How to extract the data.frame:**
+
+```r
+# Get the data.frame
+df <- results$results
+
+# Export to CSV
+write.csv(df, "bcall_results.csv", row.names = FALSE)
+
+# Use in other analyses
+library(dplyr)
+df %>%
+  filter(d2 < 0.5) %>%  # High cohesion legislators
+  arrange(d1)            # Order by ideology
 ```
 
 ## Data Format
