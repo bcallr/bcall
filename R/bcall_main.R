@@ -1,4 +1,24 @@
 # ==============================================================================
+# HELPER FUNCTIONS
+# ==============================================================================
+
+# Validate rollcall vote values
+validate_vote_values <- function(rollcall) {
+  unique_vals <- unique(as.vector(as.matrix(rollcall)))
+  unique_vals <- unique_vals[!is.na(unique_vals)]
+
+  valid_vals <- c(-1, 0, 1)
+  invalid_vals <- unique_vals[!unique_vals %in% valid_vals]
+
+  if (length(invalid_vals) > 0) {
+    stop(sprintf(
+      "Invalid vote values detected: %s\nOnly allowed values are: 1 (Yes), -1 (No), 0 (Abstention), NA (Absent)",
+      paste(invalid_vals, collapse = ", ")
+    ))
+  }
+}
+
+# ==============================================================================
 # PRINCIPLE 1: bcall_auto() - Automatic Clustering
 # ==============================================================================
 
@@ -66,6 +86,9 @@ bcall_auto <- function(rollcall,
   if (threshold < 0 || threshold > 1) {
     stop("threshold must be between 0 and 1")
   }
+
+  # Validate vote values
+  validate_vote_values(rollcall)
 
   if (verbose) {
     cat("Input validation:\n")
@@ -248,6 +271,9 @@ bcall <- function(rollcall,
   if (threshold < 0 || threshold > 1) {
     stop("threshold must be between 0 and 1")
   }
+
+  # Validate vote values
+  validate_vote_values(rollcall)
 
   # Validate clustering
   if (is.vector(clustering)) {
